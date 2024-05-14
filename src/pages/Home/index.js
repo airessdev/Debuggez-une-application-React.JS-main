@@ -13,28 +13,31 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
+  const { data } = useData();
   // // modif
   // const { data, error } = useData();
   // console.log(data, error);
   // const { last} = useData();
   // modif
-  const { data } = useData();
-  console.log(data);
-  //   const curentDate= new Date()
-  // console.log(curentDate.toISOString())
-  // const byDate = data?.events.filter((evtB, evtA) =>
-  //   new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-  // );
+  // const { data } = useData();
+  // console.log(data);
+  // //   const curentDate= new Date()
+  // // console.log(curentDate.toISOString())
+  // // const byDate = data?.events.filter((evtB, evtA) =>
+  // //   new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+  // // );
 
-  // const sortedMonths = data?events
-  // console.log(sortedMonths);
-  const byDateDesc = data?.events.sort((evtB, evtA) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-);
-  console.log(byDateDesc);
-  console.log(data)
-  const last = data?.events[0]
-   
+  // // const sortedMonths = data?events
+  // // console.log(sortedMonths);
+  const dataSorted= data?.events.toSorted((evtB, evtA) =>
+     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+  );
+
+  const last = dataSorted?.[0];
+  // // console.log(byDateDesc);
+  // // console.log(data);
+  // last = data?.events[0];
+  
 
   return (
     <>
@@ -136,14 +139,13 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
-           <EventCard
+          <EventCard
             imageSrc={last?.cover}
             title={last?.title}
             date={new Date(last?.date)}
             small
             label="boom"
-          /> 
-          
+          />
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>

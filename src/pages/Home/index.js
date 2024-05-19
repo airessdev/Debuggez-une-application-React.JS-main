@@ -13,7 +13,8 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const { data } = useData();
+  // const { data } = useData();
+  const { last } = useData();
   // // modif
   // const { data, error } = useData();
   // console.log(data, error);
@@ -29,11 +30,11 @@ const Page = () => {
 
   // // const sortedMonths = data?events
   // // console.log(sortedMonths);
-  const dataSorted= data?.events.toSorted((evtB, evtA) =>
-     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-  );
+  // const dataSorted= data?.events.toSorted((evtB, evtA) =>
+  //    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+  // );
 
-  const last = dataSorted?.[0];
+  // const last = dataSorted?.[0];
   // // console.log(byDateDesc);
   // // console.log(data);
   // last = data?.events[0];

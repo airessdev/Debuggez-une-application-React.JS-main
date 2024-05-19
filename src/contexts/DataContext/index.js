@@ -1,4 +1,4 @@
-import PropTypes , {object} from "prop-types";
+import PropTypes from "prop-types";
 import {
   createContext,
   useCallback,
@@ -19,19 +19,23 @@ export const api = {
 export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  
+  const [last, setLast] = useState(null);
 
   const getData = useCallback(async () => {
     try {
-      setData(await api.loadData());
-     
+      const loadedData = await api.loadData();
+      setData(loadedData);
+      console.log(loadedData);
+      const dataSorted = loadedData?.events.toSorted((evtB, evtA) =>
+        new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+      );
+      console.log(dataSorted);
+      setLast(dataSorted[0]);
     } catch (err) {
       setError(err);
     }
   }, []);
-  
-  
-  
+
   useEffect(() => {
     if (data) return;
     getData();
@@ -43,6 +47,7 @@ export const DataProvider = ({ children }) => {
       value={{
         data,
         error,
+        last,
       }}
     >
       {children}

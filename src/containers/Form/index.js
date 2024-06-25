@@ -13,7 +13,7 @@ const Form = ({ onSuccess, onError }) => {
       evt.preventDefault();
       // setSending(true);
       // ajout de la condition onSuccess
-      onSuccess(setSending(true))
+     onSuccess(setSending(true))
       
       try {
         await mockContactApi();
